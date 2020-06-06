@@ -25,9 +25,9 @@ DIGIT=[0-9]
 SPECIAL_IN_ID = "!" | "$" | "%" | "&" | "*" | "/" | ":"
                | "<" | "=" | ">" | "?" | "^" | "_" | "~"
                | "#"
-ALPHA=[a-zA-Z]
-LEGAL_IN_ID = {SPECIAL_IN_ID} | {DIGIT} | [+\-.@]
-IDENTIFIER=({ALPHA}|{SPECIAL_IN_ID}) {LEGAL_IN_ID}* | "+" | "-"
+START_ID=[a-zA-Z] | {SPECIAL_IN_ID}
+TAIL_ID = {START_ID} | {DIGIT} | [+\-.@]
+IDENTIFIER={START_ID} {TAIL_ID}* | "+" | "-"
 
 // for example: #\c
 CHAR_LITERAL="#\\" .
