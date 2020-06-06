@@ -17,6 +17,8 @@
                   fieldName="INSTANCE" language="Racket" extensions="rkt"/>
         <lang.parserDefinition language="Racket"
                                implementationClass="tw.racket.lang.RacketParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="Racket"
+                                       implementationClass="tw.racket.lang.RacketSyntaxHighlighterFactory"/>
     </extensions>
 
     <actions>
