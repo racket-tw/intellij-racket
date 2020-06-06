@@ -13,7 +13,8 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <fileType name="Simple File" implementationClass="tw.racket.lang.RacketFileType"
+                  fieldName="INSTANCE" language="Racket" extensions="rkt"/>
     </extensions>
 
     <actions>
