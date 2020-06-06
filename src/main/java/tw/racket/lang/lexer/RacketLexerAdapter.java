@@ -6,6 +6,6 @@ import java.io.Reader;
 
 public class RacketLexerAdapter extends FlexAdapter {
     public RacketLexerAdapter() {
-        super(new _RacketLexer((Reader) null));
+        super(new RacketLexer((Reader) null));
     }
 }
