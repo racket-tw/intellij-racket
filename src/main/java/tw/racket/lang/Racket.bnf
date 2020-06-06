@@ -1,0 +1,22 @@
+{
+  parserClass="tw.racket.lang.parser.RacketParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Racket"
+  psiImplClassSuffix="Impl"
+  psiPackage="tw.racket.lang.psi"
+  psiImplPackage="tw.racket.lang.psi.impl"
+
+  elementTypeHolderClass="tw.racket.lang.psi.RacketTypes"
+  elementTypeClass="tw.racket.lang.psi.RacketElementType"
+  tokenTypeClass="tw.racket.lang.psi.RacketTokenType"
+
+  psiImplUtilClass="tw.racket.lang.psi.impl.RacketPsiImplUtil"
+}
+
+simpleFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY
