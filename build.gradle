@@ -30,6 +30,8 @@ compileTestKotlin {
 }
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+      <li>
+        <ul>syntax highlighting</ul>
+        <ul>file type</ul>
+      </li>"""
 }
