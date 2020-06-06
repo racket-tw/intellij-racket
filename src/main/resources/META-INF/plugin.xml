@@ -19,6 +19,7 @@
                                implementationClass="tw.racket.lang.RacketParserDefinition"/>
         <lang.syntaxHighlighterFactory language="Racket"
                                        implementationClass="tw.racket.lang.RacketSyntaxHighlighterFactory"/>
+        <colorSettingsPage implementation="tw.racket.lang.RacketColorSettingsPage"/>
     </extensions>
 
     <actions>
