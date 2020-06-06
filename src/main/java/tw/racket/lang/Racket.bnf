@@ -15,8 +15,37 @@
   psiImplUtilClass="tw.racket.lang.psi.impl.RacketPsiImplUtil"
 }
 
-simpleFile ::= item_*
+racketFile ::= LANG? item_*
 
-private item_ ::= (property|COMMENT|CRLF)
-
-property ::= (KEY? SEPARATOR VALUE?) | KEY
+private item_ ::= expression_or_definition | COMMENT
+private keyword ::= QUOTE | LAMBDA | IF | SET | BEGIN | COND | AND
+                    | OR | CASE | LET | LET_STAR | LET_REC | DO | DELAY
+                    | QUASIQUOTE | ELSE | DEFINE | UNQUOTE | UNQUOTE_SPLICING
+private boolean_ ::= TRUE | FALSE
+literal ::= quotation
+          | boolean_
+          | CHAR_LITERAL
+          | STRING_LITERAL
+          | NUMBER_LITERAL
+private meta wrap_parenthesis ::= LPAREN <<p>> RPAREN
+                       | LBRACE <<p>> RBRACE
+                       | LBRACK <<p>> RBRACK
+any ::= keyword | literal | datum | <<wrap_parenthesis any>>
+form ::= <<wrap_parenthesis any>>
+private simple_datum ::= boolean_
+                       | NUMBER_LITERAL
+                       | CHAR_LITERAL
+                       | STRING_LITERAL
+                       | VARIABLE
+private compound_datum ::= list | vector
+list ::= <<wrap_parenthesis datum*>>
+       | abbreviation
+abbreviation ::= (SINGLE_QUOTE | ABBREVIATION_PREFIX) datum
+vector ::= HASH_LPAREN datum* RPAREN
+         | HASH_LBRACE datum* RBRACE
+         | HASH_LBRACK datum* RBRACK
+private datum ::= simple_datum | compound_datum
+quotation ::= SINGLE_QUOTE datum
+            | SINGLE_QUASIQUOTE datum
+            | <<wrap_parenthesis (QUOTE datum)>>
+body ::= form*
