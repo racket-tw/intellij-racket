@@ -23,7 +23,8 @@ COMMENT=(";")[^\r\n]*
 
 DIGIT=[0-9]
 SPECIAL_IN_ID = "!" | "$" | "%" | "&" | "*" | "/" | ":"
-                | "<" | "=" | ">" | "?" | "^" | "_" | "~"
+               | "<" | "=" | ">" | "?" | "^" | "_" | "~"
+               | "#"
 ALPHA=[a-zA-Z]
 LEGAL_IN_ID = {SPECIAL_IN_ID} | {DIGIT} | [+\-.@]
 IDENTIFIER=({ALPHA}|{SPECIAL_IN_ID}) {LEGAL_IN_ID}* | "+" | "-"
@@ -130,8 +131,8 @@ FALSE = "#" [fF]
 
 %%
 
-<YYINITIAL> {COMMENT} { yybegin(YYINITIAL); return RacketTypes.COMMENT; }
 <YYINITIAL> "#lang" {WS}+ {IDENTIFIER} { return RacketTypes.LANG; }
+<YYINITIAL> {COMMENT} { yybegin(YYINITIAL); return RacketTypes.COMMENT; }
 <YYINITIAL> {
     "else"              { return RacketTypes.ELSE; }
     "define"            { return RacketTypes.DEFINE; }
