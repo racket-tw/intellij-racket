@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>tw.racket.intellij-racket</id>
-    <name>林子篆</name>
+    <name>Intellij Racket</name>
     <vendor email="dannypsnl@gmail.com" url="http://www.yourcompany.com">Racket Taiwan</vendor>
 
     <description><![CDATA[
