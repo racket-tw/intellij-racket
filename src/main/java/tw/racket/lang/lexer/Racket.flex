@@ -3,7 +3,7 @@ package tw.racket.lang.lexer;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
-import tw.racket.lang.psi.RacketTypes.*;
+import tw.racket.lang.psi.RacketTypes;
 
 %%
 
@@ -130,49 +130,48 @@ FALSE = "#" [fF]
 
 %%
 
-<YYINITIAL> {COMMENT} { yybegin(YYINITIAL); return COMMENT; }
-<YYINITIAL> "#lang" {WS}+ {IDENTIFIER} { return LANG; }
+<YYINITIAL> {COMMENT} { yybegin(YYINITIAL); return RacketTypes.COMMENT; }
+<YYINITIAL> "#lang" {WS}+ {IDENTIFIER} { return RacketTypes.LANG; }
 <YYINITIAL> {
-    "else"              { return ELSE; }
-    "=>"                { return ARROW; }
-    "define"            { return DEFINE; }
-    "unquote"           { return UNQUOTE; }
-    "unquote-splicing"  { return UNQUOTE_SPLICING; }
-    "quote"             { return QUOTE; }
-    "lambda"            { return LAMBDA; }
-    "if"                { return IF; }
-    "set!"              { return SET; }
-    "begin"             { return BEGIN; }
-    "cond"              { return COND; }
-    "and"               { return AND; }
-    "or"                { return OR; }
-    "case"              { return CASE; }
-    "let"               { return LET; }
-    "let*"              { return LET_STAR; }
-    "letrec"            { return LET_REC; }
-    "do"                { return DO; }
-    "delay"             { return DELAY; }
-    "quasiquote"        { return QUASIQUOTE; }
-    {TRUE}              { return TRUE; }
-    {FALSE}             { return FALSE; }
-    "#("                { return HASH_LPAREN; }
-    "#["                { return HASH_LBRACE; }
-    "#{"                { return HASH_LBRACK; }
-    "("                 { return LPAREN; }
-    ")"                 { return RPAREN; }
-    "["                 { return LBRACE; }
-    "]"                 { return RBRACE; }
-    "{"                 { return LBRACK; }
-    "}"                 { return RBRACK; }
-    "`"                 { return SINGLE_QUASIQUOTE; }
-    "'"                 { return SINGLE_QUOTE; }
+    "else"              { return RacketTypes.ELSE; }
+    "define"            { return RacketTypes.DEFINE; }
+    "unquote"           { return RacketTypes.UNQUOTE; }
+    "unquote-splicing"  { return RacketTypes.UNQUOTE_SPLICING; }
+    "quote"             { return RacketTypes.QUOTE; }
+    "lambda"            { return RacketTypes.LAMBDA; }
+    "if"                { return RacketTypes.IF; }
+    "set!"              { return RacketTypes.SET; }
+    "begin"             { return RacketTypes.BEGIN; }
+    "cond"              { return RacketTypes.COND; }
+    "and"               { return RacketTypes.AND; }
+    "or"                { return RacketTypes.OR; }
+    "case"              { return RacketTypes.CASE; }
+    "let"               { return RacketTypes.LET; }
+    "let*"              { return RacketTypes.LET_STAR; }
+    "letrec"            { return RacketTypes.LET_REC; }
+    "do"                { return RacketTypes.DO; }
+    "delay"             { return RacketTypes.DELAY; }
+    "quasiquote"        { return RacketTypes.QUASIQUOTE; }
+    {TRUE}              { return RacketTypes.TRUE; }
+    {FALSE}             { return RacketTypes.FALSE; }
+    "#("                { return RacketTypes.HASH_LPAREN; }
+    "#["                { return RacketTypes.HASH_LBRACE; }
+    "#{"                { return RacketTypes.HASH_LBRACK; }
+    "("                 { return RacketTypes.LPAREN; }
+    ")"                 { return RacketTypes.RPAREN; }
+    "["                 { return RacketTypes.LBRACE; }
+    "]"                 { return RacketTypes.RBRACE; }
+    "{"                 { return RacketTypes.LBRACK; }
+    "}"                 { return RacketTypes.RBRACK; }
+    "`"                 { return RacketTypes.SINGLE_QUASIQUOTE; }
+    "'"                 { return RacketTypes.SINGLE_QUOTE; }
 }
 
-<YYINITIAL> {ABBREVIATION_PREFIX} { return ABBREVIATION_PREFIX; }
-<YYINITIAL> {IDENTIFIER} { return VARIABLE; }
-<YYINITIAL> {CHAR_LITERAL} { return CHAR_LITERAL; }
-<YYINITIAL> {STRING_LITERAL} { return STRING_LITERAL; }
-<YYINITIAL> {NUMBER_LITERAL} { return NUMBER_LITERAL; }
+<YYINITIAL> {ABBREVIATION_PREFIX} { return RacketTypes.ABBREVIATION_PREFIX; }
+<YYINITIAL> {IDENTIFIER} { return RacketTypes.VARIABLE; }
+<YYINITIAL> {CHAR_LITERAL} { return RacketTypes.CHAR_LITERAL; }
+<YYINITIAL> {STRING_LITERAL} { return RacketTypes.STRING_LITERAL; }
+<YYINITIAL> {NUMBER_LITERAL} { return RacketTypes.NUMBER_LITERAL; }
 
 {WS} { return TokenType.WHITE_SPACE; }
 

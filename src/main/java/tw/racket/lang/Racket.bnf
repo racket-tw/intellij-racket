@@ -17,8 +17,8 @@
 
 racketFile ::= LANG? item_*
 
-private item_ ::= expression_or_definition | COMMENT
-private keyword ::= QUOTE | LAMBDA | IF | SET | BEGIN | COND | AND
+private item_ ::= COMMENT
+keyword ::= QUOTE | LAMBDA | IF | SET | BEGIN | COND | AND
                     | OR | CASE | LET | LET_STAR | LET_REC | DO | DELAY
                     | QUASIQUOTE | ELSE | DEFINE | UNQUOTE | UNQUOTE_SPLICING
 private boolean_ ::= TRUE | FALSE
@@ -49,3 +49,4 @@ quotation ::= SINGLE_QUOTE datum
             | SINGLE_QUASIQUOTE datum
             | <<wrap_parenthesis (QUOTE datum)>>
 body ::= form*
+property ::= any
