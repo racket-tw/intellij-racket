@@ -15,7 +15,9 @@
   psiImplUtilClass="tw.racket.lang.psi.impl.RacketPsiImplUtil"
 }
 
-racketFile ::= LANG item_*
+racketFile ::= LANG body
+
+body ::= item_*
 
 private item_ ::= COMMENT | form
 keyword ::= QUOTE | LAMBDA | IF | SET | BEGIN | COND | AND
