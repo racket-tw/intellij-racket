@@ -1,22 +1,25 @@
 #lang racket
 
+(provide digano-file
+         diganostic->json)
+
+(require json)
 (require drracket/check-syntax)
 
-(define (x file-name)
+(define (digano-file file-name)
   (show-content file-name))
-(define details (x "test.rkt"))
 
-(for-each
- (λ (d)
-   (match d
-     ;;; new definition location
-     [(vector syncheck:add-definition-target start end name l)
-      (printf "~a~n" name)]
-     ;;; unused import
-     [(vector syncheck:add-unused-require start end)
-      (printf "unused require~n")]
-     ;;; popup message when mouse on it
-     [(vector syncheck:add-mouse-over-status start end message)
-      (void)]
-     [_ (printf "~a~n" d)]))
- details)
+(define (diganostic->json diganostic)
+  (match diganostic
+    ;;; new definition location
+    [(vector syncheck:add-definition-target start end name l)
+     (json-null)]
+    ;;; unused import
+    [(vector syncheck:add-unused-require start end)
+     (make-hash (list (cons 'type "unused-require")
+                      (cons 'start start)
+                      (cons 'end end)))]
+    ;;; popup message when mouse on it
+    [(vector syncheck:add-mouse-over-status start end message)
+     (json-null)]
+    [_ (json-null)]))
