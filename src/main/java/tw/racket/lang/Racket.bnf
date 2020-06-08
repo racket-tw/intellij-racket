@@ -32,8 +32,8 @@ literal ::= quotation
 private meta wrap_parenthesis ::= LPAREN <<p>> RPAREN
                        | LBRACE <<p>> RBRACE
                        | LBRACK <<p>> RBRACK
-any ::= keyword | literal | datum | <<wrap_parenthesis any>>
 form ::= <<wrap_parenthesis any*>>
+any ::= keyword | literal | datum | form
 private simple_datum ::= boolean_
                        | NUMBER_LITERAL
                        | CHAR_LITERAL
