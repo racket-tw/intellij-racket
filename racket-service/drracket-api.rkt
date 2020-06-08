@@ -13,13 +13,13 @@
   (match diganostic
     ;;; new definition location
     [(vector syncheck:add-definition-target start end name l)
-     (json-null)]
+     (make-hash (list (cons 'type "new definition")))]
     ;;; unused import
     [(vector syncheck:add-unused-require start end)
-     (make-hash (list (cons 'type "unused-require")
+     (make-hash (list (cons 'type "unused require")
                       (cons 'start start)
                       (cons 'end end)))]
     ;;; popup message when mouse on it
     [(vector syncheck:add-mouse-over-status start end message)
-     (json-null)]
+     (make-hash (list (cons 'type "info")))]
     [_ (json-null)]))
