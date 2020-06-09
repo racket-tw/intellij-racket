@@ -13,7 +13,7 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileType name="Simple File" implementationClass="tw.racket.lang.RacketFileType"
+        <fileType name="Racket File" implementationClass="tw.racket.lang.RacketFileType"
                   fieldName="INSTANCE" language="Racket" extensions="rkt"/>
         <lang.parserDefinition language="Racket"
                                implementationClass="tw.racket.lang.RacketParserDefinition"/>
