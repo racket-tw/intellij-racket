@@ -1,17 +1,14 @@
 package tw.racket.racketclient;
 
-import com.google.gson.annotations.SerializedName;
-
 public class UnusedRequire extends Message {
-    public static String TYPE = "unused require";
-    @SerializedName("start")
-    public int startPosition;
-    @SerializedName("end")
-    public int endPosition;
+    private int start;
+    private int end;
 
-    public UnusedRequire(int startPosition, int endPosition) {
-        super(TYPE);
-        this.startPosition = startPosition;
-        this.endPosition = endPosition;
+    public int getStart() {
+        return this.start;
+    }
+
+    public int getEnd() {
+        return this.end;
     }
 }
