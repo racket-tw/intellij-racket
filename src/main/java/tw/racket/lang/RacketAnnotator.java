@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
-import com.intellij.openapi.application.PluginPathManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -26,7 +25,6 @@ public class RacketAnnotator implements Annotator {
         PsiFile file = element.getContainingFile();
         Runtime runtime = Runtime.getRuntime();
         try {
-            PluginPathManager.getPluginHomePath("intellij-racket");
             Process process = runtime.exec("racket-service " + file.getVirtualFile().getPath());
             OutputStream jsonOutput = process.getOutputStream();
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(this.typeFactory()).create();
