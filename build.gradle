@@ -32,6 +32,7 @@ compileTestKotlin {
 patchPluginXml {
     changeNotes """
       <li>
+        <ul>annotation: unused require</ul>
         <ul>syntax highlighting</ul>
         <ul>file type</ul>
       </li>"""
