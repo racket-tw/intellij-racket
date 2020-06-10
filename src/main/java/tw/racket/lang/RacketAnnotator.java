@@ -13,10 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import tw.racket.lang.psi.RacketBody;
 import tw.racket.racketclient.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class RacketAnnotator implements Annotator {
     @Override
@@ -25,10 +22,12 @@ public class RacketAnnotator implements Annotator {
             return;
         }
         PsiFile file = element.getContainingFile();
-        Runtime runtime = Runtime.getRuntime();
         try {
-            String[] commands = {"racket-service", file.getVirtualFile().getPath()};
-            Process process = runtime.exec(commands);
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            processBuilder.command("racket-service", file.getVirtualFile().getPath());
+            processBuilder.directory(new File(file.getVirtualFile().getParent().getPath()));
+            Process process = processBuilder.start();
+            process.waitFor();
             InputStream jsonOutput = process.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(jsonOutput));
             StringBuilder builder = new StringBuilder();
@@ -44,12 +43,11 @@ public class RacketAnnotator implements Annotator {
                 if (msg instanceof UnusedRequire) {
                     var u = (UnusedRequire) msg;
                     TextRange unusedRequireRange = TextRange.from(u.getStart(), u.getEnd() - u.getStart());
-
-                    Annotation annotation = holder.createErrorAnnotation(unusedRequireRange, "Unused require");
+                    Annotation annotation = holder.createInfoAnnotation(unusedRequireRange, "Unused require");
                     annotation.setTextAttributes(RacketSyntaxHighlighter.BAD_CHARACTER);
                 }
             }
-        } catch (IOException | IllegalStateException e) {
+        } catch (IllegalStateException | InterruptedException | IOException e) {
             // If fail, we have noting can do
             e.printStackTrace();
         }
