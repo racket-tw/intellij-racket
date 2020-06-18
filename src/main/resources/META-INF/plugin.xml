@@ -21,6 +21,8 @@
                                        implementationClass="tw.racket.lang.RacketSyntaxHighlighterFactory"/>
         <colorSettingsPage implementation="tw.racket.lang.RacketColorSettingsPage"/>
         <annotator language="Racket" implementationClass="tw.racket.lang.RacketAnnotator"/>
+        <completion.contributor language="Racket"
+                                implementationClass="tw.racket.lang.RacketCompletionContributor"/>
     </extensions>
 
     <actions>
