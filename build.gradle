@@ -32,6 +32,8 @@ compileTestKotlin {
 patchPluginXml {
     changeNotes """
       <li>
+        <ul>completion: keywords</ul>
+        <ul>racket file icon</ul>
         <ul>annotation: unused require</ul>
         <ul>syntax highlighting</ul>
         <ul>file type</ul>
