@@ -25,4 +25,12 @@
     ;;; popup message when mouse on it
     [(vector syncheck:add-mouse-over-status start end message)
      (make-hash (list (cons 'type "OnHoverInfo")))]
+    [(vector syncheck:add-jump-to-definition start end id filename submods)
+     (make-hash (list (cons 'type "JumpToDefinition")
+                      (cons 'start start)
+                      (cons 'end end)
+                      (cons 'name id)
+                      (cons 'filename filename)
+                      ; empty submodules means defined in top-level module
+                      (cons 'submodules submods)))]
     [_ (make-hash (list (cons 'type "Ignore")))]))
