@@ -13,7 +13,10 @@
   (match diganostic
     ;;; new definition location
     [(vector syncheck:add-definition-target start end name l)
-     (make-hash (list (cons 'type "NewDefinition")))]
+     (make-hash (list (cons 'type "NewDefinition")
+                      (cons 'start start)
+                      (cons 'end end)
+                      (cons 'name name)))]
     ;;; unused import
     [(vector syncheck:add-unused-require start end)
      (make-hash (list (cons 'type "UnusedRequire")
