@@ -19,19 +19,20 @@ public class RacketAnnotator implements Annotator {
         if (!(element instanceof RacketBody)) {
             return;
         }
+        Message[] messages = new Message[0];
         try {
-            Message[] messages = MessageCollector.get().messages(element.getContainingFile());
-            for (Message msg : messages) {
-                if (msg instanceof UnusedRequire) {
-                    var u = (UnusedRequire) msg;
-                    TextRange unusedRequireRange = TextRange.from(u.getStart(), u.getEnd() - u.getStart());
-                    Annotation annotation = holder.createInfoAnnotation(unusedRequireRange, "Unused require");
-                    annotation.setTextAttributes(RacketSyntaxHighlighter.BAD_CHARACTER);
-                }
-            }
+            messages = MessageCollector.get().messages(element.getContainingFile());
         } catch (IllegalStateException | InterruptedException | IOException e) {
             // If fail, we have noting can do
             e.printStackTrace();
+        }
+        for (Message msg : messages) {
+            if (msg instanceof UnusedRequire) {
+                var u = (UnusedRequire) msg;
+                TextRange unusedRequireRange = TextRange.from(u.getStart(), u.getEnd() - u.getStart());
+                Annotation annotation = holder.createInfoAnnotation(unusedRequireRange, "Unused require");
+                annotation.setTextAttributes(RacketSyntaxHighlighter.BAD_CHARACTER);
+            }
         }
     }
 }
