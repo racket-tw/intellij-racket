@@ -34,6 +34,6 @@ public class RacketFileType extends LanguageFileType {
     @Nullable
     @Override
     public Icon getIcon() {
-        return null;
+        return RacketIcons.FILE;
     }
 }
