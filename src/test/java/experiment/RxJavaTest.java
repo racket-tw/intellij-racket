@@ -5,6 +5,7 @@ import io.reactivex.rxjava3.core.Observable;
 import org.junit.Assert;
 import org.junit.Test;
 
+// NOTE: Observable more fits our situation
 public class RxJavaTest {
     @Test
     public void flow() {
