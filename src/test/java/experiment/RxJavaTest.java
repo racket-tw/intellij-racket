@@ -8,11 +8,14 @@ import org.junit.Test;
 public class RxJavaTest {
     @Test
     public void flow() {
-        Flowable.just("Hello world").blockingSubscribe(
+        Flowable.fromSupplier(() -> {
+            int a = 1;
+            return String.format("number %d", a);
+        }).blockingSubscribe(
                 new DisposableSubscriber<>() {
                     @Override
                     public void onNext(String s) {
-                        Assert.assertEquals("Hello world", s);
+                        Assert.assertEquals("number 1", s);
                     }
 
                     @Override
