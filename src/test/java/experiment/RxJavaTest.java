@@ -1,7 +1,7 @@
 package experiment;
 
 import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.subscribers.DisposableSubscriber;
+import io.reactivex.rxjava3.core.Observable;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,21 +12,19 @@ public class RxJavaTest {
             int a = 1;
             return String.format("number %d", a);
         }).blockingSubscribe(
-                new DisposableSubscriber<>() {
-                    @Override
-                    public void onNext(String s) {
-                        Assert.assertEquals("number 1", s);
-                    }
+                (s) -> Assert.assertEquals("number 1", s),
+                (err) -> Assert.fail()
+        );
+    }
 
-                    @Override
-                    public void onError(Throwable t) {
-                        Assert.fail();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                    }
-                }
+    @Test
+    public void observable() {
+        Observable.fromSupplier(() -> {
+            int a = 1;
+            return String.format("number %d", a);
+        }).blockingSubscribe(
+                (next) -> Assert.assertEquals("number 1", next),
+                (err) -> Assert.fail()
         );
     }
 }
