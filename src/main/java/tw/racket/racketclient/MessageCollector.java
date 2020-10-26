@@ -23,7 +23,7 @@ public class MessageCollector {
 
     public @NotNull Message[] messages(PsiFile file) throws IOException, InterruptedException {
         ProcessBuilder processBuilder = new ProcessBuilder();
-        processBuilder.command("racket-service", file.getVirtualFile().getPath());
+        processBuilder.command("racket", "-l", "racket-service", file.getVirtualFile().getPath());
         processBuilder.directory(new File(file.getVirtualFile().getParent().getPath()));
         Process process = processBuilder.start();
         process.waitFor();
