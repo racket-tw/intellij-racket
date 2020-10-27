@@ -3,7 +3,7 @@ package tw.racket.lang
 import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
-class RacketFileType private constructor() : LanguageFileType(RacketLanguage) {
+object RacketFileType : LanguageFileType(RacketLanguage) {
     override fun getName(): String {
         return "Racket File"
     }
@@ -18,10 +18,5 @@ class RacketFileType private constructor() : LanguageFileType(RacketLanguage) {
 
     override fun getIcon(): Icon? {
         return RacketIcons.FILE
-    }
-
-    companion object {
-        @JvmField
-        val INSTANCE = RacketFileType()
     }
 }
