@@ -22,9 +22,7 @@ WS = {WS_CHAR}+
 COMMENT=(";")[^\r\n]*
 
 DIGIT=[0-9]
-SPECIAL_IN_ID = "!" | "$" | "%" | "&" | "*" | "/" | ":"
-               | "<" | "=" | ">" | "?" | "^" | "_" | "~"
-               | "#"
+SPECIAL_IN_ID = "!" | "$" | "%" | "&" | "*" | "/" | ":" | "<" | "=" | ">" | "?" | "^" | "_" | "~" | "#"
 START_ID=[a-zA-Z] | {SPECIAL_IN_ID}
 TAIL_ID = {START_ID} | {DIGIT} | [+\-.@]
 IDENTIFIER={START_ID} {TAIL_ID}* | "+" | "-"

@@ -11,18 +11,15 @@ public class RacketCompletionContributor extends CompletionContributor {
     private static final String[] keywords = new String[]{"define", "if", "cond", "else", "unquote", "unquote-splicing", "quote", "lambda", "if", "set!", "begin", "cond", "and", "or", "case", "let", "let*", "letrec", "do", "delay", "quasiquote"};
 
     public RacketCompletionContributor() {
-        this.extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement(RacketTypes.VARIABLE).withLanguage(RacketLanguage.INSTANCE),
-                new CompletionProvider<>() {
-                    @Override
-                    public void addCompletions(@NotNull CompletionParameters parameters,
-                                               @NotNull ProcessingContext context,
-                                               @NotNull CompletionResultSet resultSet) {
-                        for (String keyword : keywords) {
-                            resultSet.addElement(LookupElementBuilder.create(keyword));
-                        }
-                    }
+        this.extend(CompletionType.SMART, PlatformPatterns.psiElement(RacketTypes.VARIABLE).withLanguage(RacketLanguage.INSTANCE), new CompletionProvider<>() {
+            @Override
+            public void addCompletions(@NotNull CompletionParameters parameters,
+                                       @NotNull ProcessingContext context,
+                                       @NotNull CompletionResultSet resultSet) {
+                for (String keyword : keywords) {
+                    resultSet.addElement(LookupElementBuilder.create(keyword));
                 }
-        );
+            }
+        });
     }
 }
