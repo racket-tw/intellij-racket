@@ -18,43 +18,45 @@
 
 racketFile ::= LANG body
 
-body ::= item_*
+body ::= (COMMENT | top_form)*
 
-private item_ ::= COMMENT | form
-form ::= <<parenthesis (DEFINE IDENTIFIER expression)>>
-         <<parenthesis (DEFINE <<parenthesis IDENTIFIER*>> form*)>>
-         | expression
+top_form ::= <<parenthesis (MODULE_PLUS VARIABLE form*)>>
+            | <<parenthesis (REQUIRE VARIABLE*)>>
+            | <<parenthesis (PROVIDE VARIABLE*)>>
+            | form
+form ::= <<parenthesis (DEFINE VARIABLE expression)>>
+        | <<parenthesis (DEFINE <<parenthesis VARIABLE*>> form*)>>
+        | expression
 
 keyword ::= QUOTE | LAMBDA | IF | SET | BEGIN | COND | AND
-                    | OR | CASE | LET | LET_STAR | LET_REC | DO | DELAY
-                    | QUASIQUOTE | ELSE | DEFINE | UNQUOTE | UNQUOTE_SPLICING
+            | OR | CASE | LET | LET_STAR | LET_REC | DO | DELAY
+            | MODULE_PLUS | PROVIDE | REQUIRE
+            | QUASIQUOTE | ELSE | DEFINE | UNQUOTE | UNQUOTE_SPLICING
 expression ::= literal
-               | <<parenthesis (IF expression expression expression)>>
-               // function call
-               | <<parenthesis (IDENTIFIER expression*)>>
-private boolean_ ::= TRUE | FALSE
-literal ::= quotation
-          | boolean_
+                | <<parenthesis (IF expression expression expression)>>
+                | <<parenthesis (COND cond_clause_*)>>
+                | <<parenthesis (MATCH expression match_clause_*)>>
+                // function call
+                | <<parenthesis (VARIABLE expression*)>>
+private cond_clause_ ::= <<parenthesis (expression form*)>>
+private match_clause_ ::= <<parenthesis (expression form*)>>
+
+boolean ::= TRUE | FALSE
+literal ::= boolean
+          | VARIABLE
           | CHAR_LITERAL
           | STRING_LITERAL
           | NUMBER_LITERAL
+          | list
+          | vector
+          | UNQUOTE expression
+          | UNQUOTE_SPLICING expression
+list ::= SINGLE_QUOTE <<parenthesis expression*>>
+        | SINGLE_QUASIQUOTE <<parenthesis expression*>>
+vector ::= HASH_LPAREN expression* RPAREN
+         | HASH_LBRACE expression* RBRACE
+         | HASH_LBRACK expression* RBRACK
+
 private meta parenthesis ::= LPAREN <<p>> RPAREN
                        | LBRACE <<p>> RBRACE
                        | LBRACK <<p>> RBRACK
-any ::= keyword | literal | datum | form
-private simple_datum ::= boolean_
-                       | NUMBER_LITERAL
-                       | CHAR_LITERAL
-                       | STRING_LITERAL
-                       | VARIABLE
-private compound_datum ::= list | vector
-list ::= <<parenthesis datum*>>
-       | abbreviation
-abbreviation ::= (SINGLE_QUOTE | ABBREVIATION_PREFIX) datum
-vector ::= HASH_LPAREN datum* RPAREN
-         | HASH_LBRACE datum* RBRACE
-         | HASH_LBRACK datum* RBRACK
-private datum ::= simple_datum | compound_datum
-quotation ::= SINGLE_QUOTE datum
-            | SINGLE_QUASIQUOTE datum
-            | <<parenthesis (QUOTE datum)>>

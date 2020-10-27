@@ -122,16 +122,14 @@ PREFIX_2 = {RADIX_2} {EXACTNESS}
           | {EXACTNESS} {RADIX_2}
 RADIX_2 = "#b"
 
-ABBREVIATION_PREFIX = "`" | "," | ",@"
-
-TRUE = "#" [tT]
-FALSE = "#" [fF]
-
 %%
 
 <YYINITIAL> "#lang" {WS}+ {IDENTIFIER} { return RacketTypes.LANG; }
 <YYINITIAL> {COMMENT} { yybegin(YYINITIAL); return RacketTypes.COMMENT; }
 <YYINITIAL> {
+    "module+"              { return RacketTypes.MODULE_PLUS; }
+    "provide"              { return RacketTypes.PROVIDE; }
+    "require"              { return RacketTypes.REQUIRE; }
     "else"              { return RacketTypes.ELSE; }
     "define"            { return RacketTypes.DEFINE; }
     "unquote"           { return RacketTypes.UNQUOTE; }
@@ -142,6 +140,7 @@ FALSE = "#" [fF]
     "set!"              { return RacketTypes.SET; }
     "begin"             { return RacketTypes.BEGIN; }
     "cond"              { return RacketTypes.COND; }
+    "match"              { return RacketTypes.MATCH; }
     "and"               { return RacketTypes.AND; }
     "or"                { return RacketTypes.OR; }
     "case"              { return RacketTypes.CASE; }
@@ -151,8 +150,10 @@ FALSE = "#" [fF]
     "do"                { return RacketTypes.DO; }
     "delay"             { return RacketTypes.DELAY; }
     "quasiquote"        { return RacketTypes.QUASIQUOTE; }
-    {TRUE}              { return RacketTypes.TRUE; }
-    {FALSE}             { return RacketTypes.FALSE; }
+    "#t"                { return RacketTypes.TRUE; }
+    "#f"                { return RacketTypes.FALSE; }
+    "#T"                { return RacketTypes.TRUE; }
+    "#F"                { return RacketTypes.FALSE; }
     "#("                { return RacketTypes.HASH_LPAREN; }
     "#["                { return RacketTypes.HASH_LBRACE; }
     "#{"                { return RacketTypes.HASH_LBRACK; }
@@ -164,9 +165,10 @@ FALSE = "#" [fF]
     "}"                 { return RacketTypes.RBRACK; }
     "`"                 { return RacketTypes.SINGLE_QUASIQUOTE; }
     "'"                 { return RacketTypes.SINGLE_QUOTE; }
+    ","                 { return RacketTypes.UNQUOTE; }
+    ",@"                { return RacketTypes.UNQUOTE_SPLICING; }
 }
 
-<YYINITIAL> {ABBREVIATION_PREFIX} { return RacketTypes.ABBREVIATION_PREFIX; }
 <YYINITIAL> {IDENTIFIER} { return RacketTypes.VARIABLE; }
 <YYINITIAL> {CHAR_LITERAL} { return RacketTypes.CHAR_LITERAL; }
 <YYINITIAL> {STRING_LITERAL} { return RacketTypes.STRING_LITERAL; }
