@@ -23,15 +23,21 @@ body ::= (COMMENT | top_form)*
 top_form ::= <<parenthesis (MODULE_PLUS VARIABLE form*)>>
             | <<parenthesis (REQUIRE VARIABLE*)>>
             | <<parenthesis (PROVIDE VARIABLE*)>>
+            | define_struct
             | form
-form ::= <<parenthesis (DEFINE VARIABLE expression)>>
-        | <<parenthesis (DEFINE <<parenthesis VARIABLE*>> form*)>>
+define_struct ::= <<parenthesis (STRUCT VARIABLE (VARIABLE*) ("#:mutable" | "#:transparent")*)>>
+
+form ::= define_var
+        | define_func
         | expression
+define_var ::= <<parenthesis (DEFINE VARIABLE expression)>>
+define_func ::= <<parenthesis (DEFINE <<parenthesis VARIABLE*>> form*)>>
 
 keyword ::= QUOTE | LAMBDA | IF | SET | BEGIN | COND | AND
             | OR | CASE | LET | LET_STAR | LET_REC | DO | DELAY
             | MODULE_PLUS | PROVIDE | REQUIRE
             | QUASIQUOTE | ELSE | DEFINE | UNQUOTE | UNQUOTE_SPLICING
+
 expression ::= literal
                 | <<parenthesis (IF expression expression expression)>>
                 | <<parenthesis (COND cond_clause_*)>>

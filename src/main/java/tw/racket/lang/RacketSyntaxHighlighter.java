@@ -41,6 +41,7 @@ public class RacketSyntaxHighlighter extends SyntaxHighlighterBase {
                 || tokenType.equals(RacketTypes.LET)
                 || tokenType.equals(RacketTypes.LET_STAR)
                 || tokenType.equals(RacketTypes.LET_REC)
+                || tokenType.equals(RacketTypes.STRUCT)
                 || tokenType.equals(RacketTypes.COND)
                 || tokenType.equals(RacketTypes.MATCH)) {
             return KEYWORD_KEYS;

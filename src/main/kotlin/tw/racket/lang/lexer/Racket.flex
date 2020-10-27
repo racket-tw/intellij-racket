@@ -130,6 +130,7 @@ RADIX_2 = "#b"
     "module+"              { return RacketTypes.MODULE_PLUS; }
     "provide"              { return RacketTypes.PROVIDE; }
     "require"              { return RacketTypes.REQUIRE; }
+    "struct"              { return RacketTypes.STRUCT; }
     "else"              { return RacketTypes.ELSE; }
     "define"            { return RacketTypes.DEFINE; }
     "unquote"           { return RacketTypes.UNQUOTE; }
