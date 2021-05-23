@@ -27,7 +27,8 @@ sourceSets.main.java.srcDirs 'src/main/gen'
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2020.1.2'
+    version '2021.1.1'
+    plugins = ['com.intellij.java']
 }
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
